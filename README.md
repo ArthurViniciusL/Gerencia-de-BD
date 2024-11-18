@@ -1,4 +1,3 @@
-# Gerencia-de-BD
 # Teoria
 ## O que são Bancos de Dados Não Relacionais?
 
@@ -40,7 +39,7 @@ Aqui o foco será em utilizar o banco utilizando o MongoShell. Mas todas as oper
 	```
 
 --- 
-# Banco de dados
+# Banco de dados.
 ## Criando um banco de dados
 
 ```
@@ -55,7 +54,15 @@ use meu_banco_de_dados
 show dbs
 ```
 
-# Coleção
+## Excluir uma base de dados:
+
+- Dentro da base de dados selecionada, digite:
+```
+  db.dropDatabase()
+```
+
+--- 
+# Coleção.
 
 ## Criando uma coleção.
 ```
@@ -79,12 +86,18 @@ A diferença é que *show collections* retorna o nome das coleções, enquanto *
 db.nome_da_coleção.find
 ```
 
+## Editar o nome de uma coleção
+```
+db.nomeDaColecao.renameCollection("novo_nome_da_coleção")
+```
+
 ## Deletando a coleção.
 ```
 db.nome_da_coleção.drop()
 ```
 
-# Documentos
+---
+# Documentos.
 
 A sintaxe do mongoDB é a mesma do JSON.
 ## Criando um documento:
@@ -102,7 +115,7 @@ db.usuarios.insertOne({
 ```
 ## Criando vários documentos:
 ```
-db.usuarios.insertMany([ { atributos: valores }, ... ]);
+db.nome_da_coleção.insertMany([ { atributos: valores }, ... ]);
 ```
 
 **Exemplo:**
@@ -113,9 +126,54 @@ db.usuarios.insertMany([
 ]);
 ```
 
+## Listando todos os documentos:
+
+```
+db.nome_da_coleção.find()
+```
+
 ## Listando o conteúdo de um documento:
 ```
-db.receitas.find(atributo: conteúdo)
+db.nome_da_coleção.find({atributo: conteúdo})
+```
+
+## Editar um documento:
+
+```
+db.nome_da_coleção.updateOne(
+  { campo: "valorParaLocalizar" },
+  { $set: { campoParaAtualizar: "novoValor" } }
+)
+```
+
+- **Exemplo:**
+```
+	db.clientes.updateOne(
+	  { nome: "João Silva" },
+	  { $set: { idade: 31 } }
+	)
+ ```
+
+## Editar vários documentos:
+```
+db.nome_da_coleção.updateMany(
+  { campo: "valorParaLocalizar" },
+  { $set: { campoParaAtualizar: "novoValor" } }
+)
+```
+
+- A principal diferença é que o `updateMany` irá alterar **todos** os campos localizados na busca.
+
+## Excluir um documento:
+
+```
+db.nome_da_coleção.deleteOne({ campo: "valorParaLocalizar" })
+```
+
+## Excluir vários documentos
+
+```
+db.nome_da_coleção.deleteMany({ campo: "valorParaLocalizar" })
 ```
 
 ---
